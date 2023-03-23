@@ -3,6 +3,7 @@ package com.backend.jpaadvance.controller;
 import com.backend.jpaadvance.entity.Employee;
 import com.backend.jpaadvance.model.EmployeePage;
 import com.backend.jpaadvance.model.EmployeeSearch;
+import com.backend.jpaadvance.repository.generic.Filter;
 import com.backend.jpaadvance.service.EmployeeService;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
@@ -46,6 +47,11 @@ public class EmployeeController {
     @GetMapping("/{firstname}/{department}")
     public List<Employee> findByFirstnameAndDepartment(@PathVariable("firstname") String firstname, @PathVariable("department") String department) {
         return employeeService.findByFirstnameAndCompany(firstname, department);
+    }
+
+    @PostMapping
+    public List<Employee> getEmployees(@RequestBody List<Filter> filters) {
+        return employeeService.getQueryResult(filters);
     }
 
     @GetMapping("/query-predicate")
