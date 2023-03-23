@@ -1,0 +1,15 @@
+[
+  {
+    "field": "age",
+    "operator": "EQUALS",
+    "value": "20"
+  },
+  {
+    "field": "firstName",
+    "operator": "IN",
+    "value": "string",
+    "values": [
+      "Oconnor","George"
+    ]
+  }
+]

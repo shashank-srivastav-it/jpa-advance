@@ -7,6 +7,7 @@ import com.backend.jpaadvance.model.EmployeePage;
 import com.backend.jpaadvance.model.EmployeeSearch;
 import com.backend.jpaadvance.repository.EmployeeCustomRepository;
 import com.backend.jpaadvance.repository.EmployeeRepository;
+import com.backend.jpaadvance.repository.generic.Filter;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -20,6 +21,7 @@ import java.util.Objects;
 
 import static com.backend.jpaadvance.repository.predicates.EmployeePredicates.hasFirstName;
 import static com.backend.jpaadvance.repository.predicates.EmployeePredicates.inCompany;
+import static com.backend.jpaadvance.repository.specifications.EmployeeGenericSpecification.getSpecificationFromFilters;
 
 @Service
 public class EmployeeService {
@@ -71,8 +73,14 @@ public class EmployeeService {
         if (maxAge != null && maxAge != 0 && minAge != null && minAge != 0) {
             booleanBuilder.or(QEmployee.employee.age.between(minAge, maxAge));
         }
-        return employeeRepository.findAll(booleanBuilder.getValue(),
-                PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, Employee_.ID)));
+        return employeeRepository.findAll(booleanBuilder.getValue(), PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, Employee_.ID)));
     }
 
+    public List<Employee> getQueryResult(List<Filter> filters) {
+        if (filters.size() > 0) {
+            return employeeRepository.findAll(getSpecificationFromFilters(filters));
+        } else {
+            return (List<Employee>) employeeRepository.findAll();
+        }
+    }
 }
