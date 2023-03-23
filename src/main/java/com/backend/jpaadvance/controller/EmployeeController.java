@@ -65,4 +65,7 @@ public class EmployeeController {
                                                         @RequestParam(name = "size", defaultValue = "5") int size) {
         return employeeService.getEmployeesViaBooleanBuilder(firstname, lastname, minAge, maxAge, page, size);
     }
+    //    Sample url
+    // http://localhost:8080/employee/query-predicate?gender=female&age=20&sortBy=firstName&size=4
+    //http://localhost:8080/employee/boolean-builder?minAge=20&maxAge=30&sortBy=firstName&size=4
 }
