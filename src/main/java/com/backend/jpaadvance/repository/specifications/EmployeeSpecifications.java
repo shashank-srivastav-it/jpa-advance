@@ -5,6 +5,8 @@ import com.backend.jpaadvance.entity.Employee_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class EmployeeSpecifications {
     public static Specification<Employee> hasFirstName(String firstname) {
@@ -23,5 +25,11 @@ public class EmployeeSpecifications {
         return ((root, criteriaQuery, criteriaBuilder) -> {
             return criteriaBuilder.equal(root.get(Employee_.company), company);
         });
+    }
+    public static Specification<Employee> ageBetween(Integer min, Integer max) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get(Employee_.AGE), min, max);
+    }
+    public static Specification<Employee> belongsToCompany(List<String> companies) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.isTrue(root.get(Employee_.company).in(companies));
     }
 }
