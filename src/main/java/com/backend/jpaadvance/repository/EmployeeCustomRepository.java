@@ -3,7 +3,11 @@ package com.backend.jpaadvance.repository;
 import com.backend.jpaadvance.entity.Employee;
 import com.backend.jpaadvance.model.EmployeePage;
 import com.backend.jpaadvance.model.EmployeeSearch;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
