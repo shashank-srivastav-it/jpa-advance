@@ -9,5 +9,4 @@ public class JpaAdvanceApplication {
     public static void main(String[] args) {
         SpringApplication.run(JpaAdvanceApplication.class, args);
     }
-
 }
