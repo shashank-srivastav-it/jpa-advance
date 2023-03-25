@@ -26,9 +26,11 @@ public class EmployeeSpecifications {
             return criteriaBuilder.equal(root.get(Employee_.company), company);
         });
     }
+
     public static Specification<Employee> ageBetween(Integer min, Integer max) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get(Employee_.AGE), min, max);
     }
+
     public static Specification<Employee> belongsToCompany(List<String> companies) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.isTrue(root.get(Employee_.company).in(companies));
     }

@@ -1,13 +1,12 @@
-package com.backend.jpaadvance.repository.generic;
+package com.backend.jpaadvance.model;
 
+import com.backend.jpaadvance.enumeration.QueryOperator;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class Filter {
     private String field;

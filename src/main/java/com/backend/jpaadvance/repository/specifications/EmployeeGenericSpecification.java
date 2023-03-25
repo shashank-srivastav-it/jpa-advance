@@ -1,7 +1,7 @@
 package com.backend.jpaadvance.repository.specifications;
 
 import com.backend.jpaadvance.entity.Employee;
-import com.backend.jpaadvance.repository.generic.Filter;
+import com.backend.jpaadvance.model.Filter;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 

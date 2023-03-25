@@ -1,4 +1,4 @@
-package com.backend.jpaadvance.repository.generic;
+package com.backend.jpaadvance.enumeration;
 
 public enum QueryOperator {
     GREATER_THAN,
