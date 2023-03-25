@@ -1,11 +1,9 @@
 package com.backend.jpaadvance.controller;
 
 import com.backend.jpaadvance.entity.Employee;
-import com.backend.jpaadvance.model.EmployeePage;
-import com.backend.jpaadvance.model.EmployeeSearch;
-import com.backend.jpaadvance.repository.generic.Filter;
 import com.backend.jpaadvance.service.EmployeeService;
 import com.querydsl.core.types.Predicate;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
@@ -21,18 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
-
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
-
-    @GetMapping("/criteria-query")
-    public ResponseEntity<Page<Employee>> getEmployees(EmployeePage employeePage, EmployeeSearch employeeSearchCriteria) {
-        return new ResponseEntity<>(employeeService.getEmployees(employeePage, employeeSearchCriteria), HttpStatus.OK);
-    }
+    private EmployeeService employeeService;
 
     @PostMapping("/single")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
@@ -47,11 +37,6 @@ public class EmployeeController {
     @GetMapping("/{firstname}/{department}")
     public List<Employee> findByFirstnameAndDepartment(@PathVariable("firstname") String firstname, @PathVariable("department") String department) {
         return employeeService.findByFirstnameAndCompany(firstname, department);
-    }
-
-    @PostMapping
-    public List<Employee> getEmployees(@RequestBody List<Filter> filters) {
-        return employeeService.getQueryResult(filters);
     }
 
     @GetMapping("/query-predicate")
