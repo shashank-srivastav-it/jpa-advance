@@ -1,15 +1,10 @@
-[
-  {
-    "field": "age",
-    "operator": "EQUALS",
-    "value": "20"
-  },
-  {
-    "field": "firstName",
-    "operator": "IN",
-    "value": "string",
-    "values": [
-      "Oconnor","George"
-    ]
-  }
-]
+{
+  "pageNumber": 0,
+  "pageSize": 5,
+  "sortDirection": "DESC",
+  "sortBy": "lastName"
+},
+{
+"age": 20,
+"firstName": "Oconnor"
+}
