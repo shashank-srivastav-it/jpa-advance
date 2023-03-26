@@ -5,6 +5,10 @@ import com.backend.jpaadvance.entity.Employee_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Component
@@ -21,10 +25,19 @@ public class EmployeeSpecifications {
         });
     }
 
+//    public static Specification<Employee> inCompany(String company) {
+//        return ((root, criteriaQuery, criteriaBuilder) -> {
+//            return criteriaBuilder.equal(root.get(Employee_.company), company);
+//        });
+//    }
+
     public static Specification<Employee> inCompany(String company) {
-        return ((root, criteriaQuery, criteriaBuilder) -> {
-            return criteriaBuilder.equal(root.get(Employee_.company), company);
-        });
+        return new Specification<>() {
+            @Override
+            public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.equal(root.get(Employee_.company), company);
+            }
+        };
     }
 
     public static Specification<Employee> ageBetween(Integer min, Integer max) {
