@@ -1,8 +1,9 @@
 package com.backend.jpaadvance.service;
 
 import com.backend.jpaadvance.entity.Employee;
-import com.backend.jpaadvance.entity.Employee_;
 import com.backend.jpaadvance.entity.QEmployee;
+import com.backend.jpaadvance.model.EmployeePage;
+import com.backend.jpaadvance.model.EmployeeSearch;
 import com.backend.jpaadvance.repository.EmployeeRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
@@ -47,17 +48,17 @@ public class EmployeeService {
         return employeeRepository.findAll(predicate, PageRequest.of(page, size, sortObj));
     }
 
-    public Page<Employee> getEmployeesViaBooleanBuilder(String firstname, String lastname, Integer minAge, Integer maxAge, int page, int size) {
+    public Page<Employee> getEmployeesViaBooleanBuilder(EmployeeSearch employeeSearch, EmployeePage employeePage) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (firstname != null && !firstname.isEmpty()) {
-            booleanBuilder.or(QEmployee.employee.firstName.eq(firstname));
+        if (Objects.nonNull(employeeSearch.getFirstName())) {
+            booleanBuilder.and(QEmployee.employee.firstName.eq(employeeSearch.getFirstName()));
         }
-        if (lastname != null && !lastname.isEmpty()) {
-            booleanBuilder.or(QEmployee.employee.lastName.eq(lastname));
+        if (Objects.nonNull(employeeSearch.getLastName())) {
+            booleanBuilder.and(QEmployee.employee.lastName.eq(employeeSearch.getLastName()));
         }
-        if (maxAge != null && maxAge != 0 && minAge != null && minAge != 0) {
-            booleanBuilder.or(QEmployee.employee.age.between(minAge, maxAge));
+        if (Objects.nonNull(employeeSearch.getMaxAge()) && employeeSearch.getMaxAge() != 0 && Objects.nonNull(employeeSearch.getMinAge()) && employeeSearch.getMinAge() != 0) {
+            booleanBuilder.and(QEmployee.employee.age.between(employeeSearch.getMinAge(), employeeSearch.getMaxAge()));
         }
-        return employeeRepository.findAll(booleanBuilder.getValue(), PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, Employee_.ID)));
+        return employeeRepository.findAll(booleanBuilder.getValue(), PageRequest.of(employeePage.getPageNumber(), employeePage.getPageSize(), Sort.by(employeePage.getSortDirection(), employeePage.getSortBy())));
     }
 }
