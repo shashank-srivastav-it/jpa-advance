@@ -2,14 +2,18 @@ package com.backend.jpaadvance.repository;
 
 import com.backend.jpaadvance.entity.Employee;
 import com.backend.jpaadvance.entity.QEmployee;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
+@Tag(name = "Employee Data Rest Controller", description = "CRUD operations for Employee")
+@RepositoryRestResource(path = "employees")
 public interface EmployeeRepository extends CrudRepository<Employee, Long>, QuerydslPredicateExecutor<Employee>, QuerydslBinderCustomizer<QEmployee> {
     default void customize(QuerydslBindings bindings, QEmployee employee) {
 //        bindings.bind(employee.age).all((path, values) -> {
