@@ -4,6 +4,7 @@ import com.backend.jpaadvance.entity.Employee;
 import com.backend.jpaadvance.model.EmployeePage;
 import com.backend.jpaadvance.model.EmployeeSearch;
 import com.backend.jpaadvance.service.EmployeeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -19,17 +20,13 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/employee")
+@Tag(name = "Employee Controller")
 public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/criteria-query")
     public ResponseEntity<Page<Employee>> getEmployees(EmployeePage employeePage, EmployeeSearch employeeSearchCriteria) {
         return new ResponseEntity<>(employeeService.getEmployees(employeePage, employeeSearchCriteria), HttpStatus.OK);
-    }
-
-    @PostMapping("/single")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeService.addEmployee(employee), HttpStatus.OK);
     }
 
     @PostMapping("/multiple")
