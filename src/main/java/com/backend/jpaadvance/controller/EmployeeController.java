@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -33,9 +34,9 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.addEmployees(employees), HttpStatus.OK);
     }
 
-    @GetMapping("/{firstname}/{department}")
-    public List<Employee> findByFirstnameAndDepartment(@PathVariable("firstname") String firstname, @PathVariable("department") String department) {
-        return employeeService.findByFirstnameAndCompany(firstname, department);
+    @GetMapping("/{firstname}/{company}")
+    public List<Employee> findByFirstnameAndCompany(@PathVariable("firstname") String firstname, @PathVariable("company") String company) {
+        return employeeService.findByFirstnameAndCompany(firstname, company);
     }
 
     @GetMapping("/query-predicate")
@@ -50,8 +51,4 @@ public class EmployeeController {
     public Page<Employee> getEmployeesViaBooleanBuilder(EmployeeSearch employeeSearch, EmployeePage employeePage) {
         return employeeService.getEmployeesViaBooleanBuilder(employeeSearch, employeePage);
     }
-
-    //    Sample url
-    // http://localhost:8080/employee/query-predicate?gender=female&age=20&sortBy=firstName&size=4
-    //http://localhost:8080/employee/boolean-builder?minAge=20&maxAge=30&sortBy=firstName&size=4
 }

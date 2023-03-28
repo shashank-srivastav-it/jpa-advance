@@ -1,6 +1,7 @@
 package com.backend.jpaadvance.service;
 
 import com.backend.jpaadvance.entity.Employee;
+import com.backend.jpaadvance.entity.Employee_;
 import com.backend.jpaadvance.entity.QEmployee;
 import com.backend.jpaadvance.model.EmployeePage;
 import com.backend.jpaadvance.model.EmployeeSearch;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.backend.jpaadvance.repository.predicates.EmployeePredicates.hasFirstName;
 import static com.backend.jpaadvance.repository.predicates.EmployeePredicates.inCompany;
@@ -40,7 +42,7 @@ public class EmployeeService {
     }
 
     public Page<Employee> getEmployeesViaRequestPredicate(Predicate predicate, String sortBy, int page, int size) {
-        Sort sortObj = (Objects.nonNull(sortBy)) ? Sort.by(sortBy.split(",")) : null;
+        Sort sortObj = Objects.nonNull(sortBy) ? Sort.by(sortBy.split(",")) : Sort.by(Employee_.FIRST_NAME);
         return employeeRepository.findAll(predicate, PageRequest.of(page, size, sortObj));
     }
 
