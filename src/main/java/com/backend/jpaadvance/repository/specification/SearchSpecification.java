@@ -36,14 +36,14 @@ public class SearchSpecification<T> implements Specification<T> {
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         Predicate predicate = cb.equal(cb.literal(Boolean.TRUE), Boolean.TRUE);
 
-        for (FilterRequest filter : this.request.getFilters()) {
+        for (FilterRequest filter : request.getFilters()) {
             log.info("Filter: {} {} {}", filter.getKey(), filter.getOperator().toString(), filter.getValue());
             setFieldType(filter, root);
             predicate = filter.getOperator().build(root, cb, filter, predicate);
         }
 
         List<Order> orders = new ArrayList<>();
-        for (SortRequest sort : this.request.getSorts()) {
+        for (SortRequest sort : request.getSorts()) {
             orders.add(sort.getDirection().build(root, cb, sort));
         }
 
@@ -52,7 +52,7 @@ public class SearchSpecification<T> implements Specification<T> {
     }
 
     public static Pageable getPageable(Integer page, Integer size) {
-        return PageRequest.of(Objects.requireNonNullElse(page, 0), Objects.requireNonNullElse(size, 100));
+        return PageRequest.of(Objects.requireNonNullElse(page, 0), Objects.requireNonNullElse(size, 5));
     }
 
     public static <T> void setFieldType(FilterRequest filter, Root<T> root) {

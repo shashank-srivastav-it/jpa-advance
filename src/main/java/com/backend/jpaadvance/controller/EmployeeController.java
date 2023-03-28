@@ -3,6 +3,7 @@ package com.backend.jpaadvance.controller;
 import com.backend.jpaadvance.entity.Employee;
 import com.backend.jpaadvance.model.SearchRequest;
 import com.backend.jpaadvance.service.EmployeeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,10 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/employee")
+@RequestMapping("/employees")
+@Tag(name = "Employee Controller")
 public class EmployeeController {
     private EmployeeService employeeService;
-
-    @PostMapping("/single")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeService.addEmployee(employee), HttpStatus.OK);
-    }
 
     @PostMapping("/multiple")
     public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {

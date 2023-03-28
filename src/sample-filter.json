@@ -1,15 +1,54 @@
-[
-  {
-    "field": "age",
-    "operator": "EQUALS",
-    "value": "20"
-  },
-  {
-    "field": "firstName",
-    "operator": "IN",
-    "value": "string",
-    "values": [
-      "Oconnor","George"
-    ]
-  }
-]
+{
+  "filters": [
+    {
+      "key": "age",
+      "operator": "GREATER_THAN",
+      "value": "20"
+    },
+    {
+      "key": "gender",
+      "operator": "EQUAL",
+      "value": "male"
+    },
+    {
+      "key": "id",
+      "operator": "BETWEEN",
+      "value": "1",
+      "valueTo":"150"
+    },
+    {
+      "key": "isActive",
+      "operator": "NOT_EQUAL",
+      "value": "false"
+    },
+    {
+      "key": "salary",
+      "operator": "LIKE",
+      "value": "$3,"
+    },
+    {
+      "key": "age",
+      "operator": "LESS_THAN",
+      "value": "35"
+    },
+    {
+      "key": "email",
+      "operator": "IN",
+      "values": [
+        "mirandaslater@enquility.com","mooneyblevins@bittor.com","howellwelch@slambda.com","prattsantana@exovent.com"
+      ]
+    }
+  ],
+  "sorts": [
+    {
+      "key": "firstName",
+      "direction": "ASC"
+    },
+    {
+      "key": "id",
+      "direction": "ASC"
+    }
+  ],
+  "page": 0,
+  "size": 5
+}
