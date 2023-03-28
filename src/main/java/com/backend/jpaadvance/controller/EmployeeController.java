@@ -19,18 +19,18 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 @Tag(name = "Employee Controller")
 public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/criteria-query")
-    public ResponseEntity<Page<Employee>> getEmployees(EmployeePage employeePage, EmployeeSearch employeeSearchCriteria) {
+    public ResponseEntity<Page<Employee>> getEmployeesPage(EmployeePage employeePage, EmployeeSearch employeeSearchCriteria) {
         return new ResponseEntity<>(employeeService.getEmployees(employeePage, employeeSearchCriteria), HttpStatus.OK);
     }
 
     @PostMapping("/multiple")
-    public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {
+    public ResponseEntity<?> addEmployees(@RequestBody List<Employee> employees) {
         return new ResponseEntity<>(employeeService.addEmployees(employees), HttpStatus.OK);
     }
 }

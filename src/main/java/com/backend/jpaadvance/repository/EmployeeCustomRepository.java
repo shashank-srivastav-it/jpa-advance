@@ -57,7 +57,7 @@ public class EmployeeCustomRepository {
             predicates.add(criteriaBuilder.equal(employeeRoot.get(Employee_.age), employeeSearchCriteria.getAge()));
         }
         if (Objects.nonNull(employeeSearchCriteria.getFirstName())) {
-            predicates.add(criteriaBuilder.like(employeeRoot.get(Employee_.FIRST_NAME), "%" + employeeSearchCriteria.getFirstName()+ "%"));
+            predicates.add(criteriaBuilder.like(employeeRoot.get(Employee_.FIRST_NAME), "%" + employeeSearchCriteria.getFirstName() + "%"));
         }
         if (Objects.nonNull(employeeSearchCriteria.getLastName())) {
             predicates.add(criteriaBuilder.like(employeeRoot.get(Employee_.LAST_NAME), "%" + employeeSearchCriteria.getLastName() + "%"));
