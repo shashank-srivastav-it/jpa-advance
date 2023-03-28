@@ -56,6 +56,10 @@ public class EmployeeGenericSpecification {
             return Double.valueOf(value);
         } else if (fieldType.isAssignableFrom(Integer.class)) {
             return Integer.valueOf(value);
+        } else if (fieldType.isAssignableFrom(Long.class)) {
+            return Long.valueOf(value);
+        } else if (fieldType.isAssignableFrom(Boolean.class)) {
+            return Boolean.valueOf(value);
         } else if (Enum.class.isAssignableFrom(fieldType)) {
             return Enum.valueOf(fieldType, value);
         }

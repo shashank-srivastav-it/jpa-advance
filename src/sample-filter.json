@@ -1,15 +1,39 @@
 [
   {
     "field": "age",
-    "operator": "EQUALS",
+    "operator": "GREATER_THAN",
     "value": "20"
+  },
+  {
+    "field": "gender",
+    "operator": "EQUALS",
+    "value": "male"
+  },
+  {
+    "field": "id",
+    "operator": "LESS_THAN",
+    "value": "26"
+  },
+  {
+    "field": "isActive",
+    "operator": "EQUALS",
+    "value": "true"
+  },
+  {
+    "field": "salary",
+    "operator": "LIKE",
+    "value": "$2,"
   },
   {
     "field": "firstName",
     "operator": "IN",
-    "value": "string",
     "values": [
-      "Oconnor","George"
+      "Webster","Shaffer","Odom"
     ]
+  },
+  {
+    "field": "id",
+    "operator": "NOT_EQ",
+    "value": "1"
   }
 ]

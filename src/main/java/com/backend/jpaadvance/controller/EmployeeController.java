@@ -3,6 +3,7 @@ package com.backend.jpaadvance.controller;
 import com.backend.jpaadvance.entity.Employee;
 import com.backend.jpaadvance.model.Filter;
 import com.backend.jpaadvance.service.EmployeeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,28 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 @AllArgsConstructor
+@Tag(name = "Employee Controller")
 public class EmployeeController {
     private EmployeeService employeeService;
-
-    @PostMapping("/single")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeService.addEmployee(employee), HttpStatus.OK);
-    }
 
     @PostMapping("/multiple")
     public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {
         return new ResponseEntity<>(employeeService.addEmployees(employees), HttpStatus.OK);
     }
 
-    @GetMapping("/{firstname}/{department}")
-    public List<Employee> findByFirstnameAndDepartment(@PathVariable("firstname") String firstname, @PathVariable("department") String department) {
-        return employeeService.findByFirstnameAndCompany(firstname, department);
-    }
-
-    @PostMapping
+    @PostMapping("/filter")
     public List<Employee> getEmployees(@RequestBody List<Filter> filters) {
         return employeeService.getQueryResult(filters);
+    }
+
+    @GetMapping("/{firstname}/{company}")
+    public List<Employee> findByFirstnameAndCompany(@PathVariable("firstname") String firstname, @PathVariable("company") String company) {
+        return employeeService.findByFirstnameAndCompany(firstname, company);
     }
 }

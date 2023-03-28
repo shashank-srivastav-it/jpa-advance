@@ -18,10 +18,6 @@ import static org.springframework.data.jpa.domain.Specification.where;
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
-
     public String addEmployees(List<Employee> employees) {
         List<Employee> result = (List<Employee>) employeeRepository.saveAll(employees);
         if (result.size() == employees.size()) {
